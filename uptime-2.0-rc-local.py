@@ -194,9 +194,9 @@ while (True):
 	Vout = ch1_mult*getreading(address, channel2) + 0.08
 	TempV = ch3_mult*getreading(address, channel3) + 0.08
 # For Pi-Z-UpTime 2.0 use the value below.
-	TempC = (3.95 - TempV) / 0.0432 # Temperature in C calculated.
+#	TempC = (3.95 - TempV) / 0.0432 # Temperature in C calculated.
 # Use the line below for Pi-UpTime UPS 2.0
-#	TempC = (4.236 - TempV) / 0.0408 # Temperature in C calculated.
+	TempC = (4.236 - TempV) / 0.0408 # Temperature in C calculated.
 # Convert C to F
 	TempF = TempC * 1.8 + 32.0  # Temperature in F
 #====================================================================================

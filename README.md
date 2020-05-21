@@ -30,3 +30,22 @@ At any time you can hit Control C to terminate the program.
  are using Pi-UpTime or PiZ-UpTime._**
  
  Contact support via https://alchemy-power.com/contact-us/ should you have any issues.
+
+## Install Raspbian systemd Service
+
+To enable the service when the Pi boots
+
+    sudo ln -s `pwd`/uptime-2.0.service /etc/systemd/system/uptime-2.0.service
+    sudo systemctl daemon-reload
+    sudo systemctl enable uptime-2.0.service
+    sudo systemctl start uptime-2.0.service
+
+To stop the service:
+
+    sudo systemctl stop uptime-2.0.service
+
+Read journal output from the process
+
+    journalctl -b -u uptime-2.0.service
+
+

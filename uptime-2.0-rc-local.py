@@ -161,7 +161,7 @@ def getreading(adc_address,adc_channel):
 #	print "Data register read as 16 but word is ", reading
 
 # Do the proper bit movements. Refer to data sheet for how the bits are read in.
- 	valor = ((((reading) & 0xFF) <<8) | ((int(reading) & 0xFFF0)>>8))
+	valor = ((((reading) & 0xFF) <<8) | ((int(reading) & 0xFFF0)>>8))
 	valor = valor >> 4 # 4 LSB bits are ignored.
 
 # Debug print the bit movement value...

@@ -33,10 +33,12 @@ At any time you can hit Control C to terminate the program.
 
 ## Install Raspbian systemd Service
 
-This is an alternative to setting up /etc/rc.local, for Raspbian Buster systems. Do not setup /etc/rc.local if you use this method as you'll use systemctl instead.
+Configure uptime monitoring and auto shut-off using [systemd](https://www.raspberrypi.org/documentation/linux/usage/systemd.md). This is an alternative to setting up /etc/rc.local, for Raspbian Buster systems. Do not setup /etc/rc.local if you use the systemd method.
 
-To enable the service when the Pi boots
+To enable the systemd service when the Pi boots:
 
+    sudo apt-get install python-systemd # if using python 2
+    sudo apt-get install python3-systemd # if using python 3
     sudo ln -s `pwd`/uptime-2.0.service /etc/systemd/system/uptime-2.0.service
     sudo systemctl daemon-reload
     sudo systemctl enable uptime-2.0.service
@@ -46,8 +48,10 @@ To stop the service:
 
     sudo systemctl stop uptime-2.0.service
 
-Read journal output from the process
+Read and follow journal output from the process
 
-    journalctl -b -u uptime-2.0.service
+    journalctl -f -u uptime-2.0.service
+
+Note that systemd services have some [documentation](https://www.freedesktop.org/software/systemd/man/systemd.service.html) you may want to read if modifying uptime-2.0.service.
 
 

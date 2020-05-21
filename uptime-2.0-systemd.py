@@ -215,16 +215,16 @@ while (True):
 # Convert C to F
 	TempF = TempC * 1.8 + 32.0  # Temperature in F
 
-	log.info("Time: %s Vin: %5.2f Vout: %5.2f Vbattery: %5.2f TempC: %8.2fC TempF: %6.2fF" % (time.ctime(), Vin, Vout, Vbattery, TempC, TempF))
+#	log.info("Vin: %5.2f Vout: %5.2f Vbattery: %5.2f TempC: %8.2fC TempF: %6.2fF" % (Vin, Vout, Vbattery, TempC, TempF))
 #====================================================================================
 # Check to see if all operating conditions are OK.
 #
 #====================================================================================
 	# If input V is low and battery V is low initiate the shutdown process.
 	if ( Vin < V_in_min ): # Vin has failed or is a brownout
-		log.warn("Vin is in brownout below %5.2f: Vin: %5.2f Vout: %5.2f Vbattery: %5.2f TempC: %8.2fC TempF: %6.2fF" % (V_in_min, Vin, Vout, Vbattery, TempC, TempF))
+		log.warning("Vin is in brownout below %5.2f: Vin: %5.2f Vout: %5.2f Vbattery: %5.2f TempC: %8.2fC TempF: %6.2fF" % (V_in_min, Vin, Vout, Vbattery, TempC, TempF))
 		if (Vbattery < V_batt_min ): # Battery is low, time to shutdown.
-			log.warn("Battery exhausted below %5.2f, shutdown initiated: Vin: %5.2f Vout: %5.2f Vbattery: %5.2f TempC: %8.2fC TempF: %6.2fF" % (V_batt_min, Vin, Vout, Vbattery, TempC, TempF))
+			log.warning("Battery exhausted below %5.2f, shutdown initiated: Vin: %5.2f Vout: %5.2f Vbattery: %5.2f TempC: %8.2fC TempF: %6.2fF" % (V_batt_min, Vin, Vout, Vbattery, TempC, TempF))
 #			print("Shutdown initiated at %s " % (time.ctime()))
                 	#
 			sys.stdout.flush()
@@ -235,7 +235,9 @@ while (True):
 			time.sleep(2)
                 	# Flush any stdout messages before exiting..
 			exit() # Exit out of the code - no further print etc. is printed.
-
+	else:
+		# happy path: everything is ok, so only log current values
+		log.info("Vin: %5.2f Vout: %5.2f Vbattery: %5.2f TempC: %8.2fC TempF: %6.2fF" % (Vin, Vout, Vbattery, TempC, TempF))
 #====================================================================================
 # End of check statements. At end of the while statement.
 #====================================================================================

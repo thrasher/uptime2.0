@@ -222,9 +222,9 @@ while (True):
 #====================================================================================
 	# If input V is low and battery V is low initiate the shutdown process.
 	if ( Vin < V_in_min ): # Vin has failed or is a brownout
-		log.warning("Vin is in brownout below %5.2f: Vin: %5.2f Vout: %5.2f Vbattery: %5.2f TempC: %8.2fC TempF: %6.2fF" % (V_in_min, Vin, Vout, Vbattery, TempC, TempF))
+		log.warning("Brownout as Vin below %2.2f: Vin: %2.2f, Vout: %2.2f, Vbatt: %2.2f, TempC: %3.2f, TempF: %4.2f" % (V_in_min, Vin, Vout, Vbattery, TempC, TempF))
 		if (Vbattery < V_batt_min ): # Battery is low, time to shutdown.
-			log.critical("Battery exhausted below %5.2f, shutdown initiated: Vin: %5.2f Vout: %5.2f Vbattery: %5.2f TempC: %8.2fC TempF: %6.2fF" % (V_batt_min, Vin, Vout, Vbattery, TempC, TempF))
+			log.critical("Shutdown initiated at battery voltage below %2.2f: Vin: %2.2f, Vout: %2.2f, Vbatt: %2.2f, TempC: %3.2f, TempF: %4.2f" % (V_batt_min, Vin, Vout, Vbattery, TempC, TempF))
 #			print("Shutdown initiated at %s " % (time.ctime()))
                 	#
 			sys.stdout.flush()
@@ -237,7 +237,7 @@ while (True):
 			exit() # Exit out of the code - no further print etc. is printed.
 	else:
 		# happy path: everything is ok, so only log current values
-		log.info("Vin: %5.2f Vout: %5.2f Vbattery: %5.2f TempC: %8.2fC TempF: %6.2fF" % (Vin, Vout, Vbattery, TempC, TempF))
+		log.info("Normal: Vin: %2.2f, Vout: %2.2f, Vbatt: %2.2f, TempC: %3.2f, TempF: %4.2f" % (Vin, Vout, Vbattery, TempC, TempF))
 #====================================================================================
 # End of check statements. At end of the while statement.
 #====================================================================================

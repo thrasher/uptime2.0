@@ -7,7 +7,7 @@ ExecStart=/usr/bin/python3 -u uptime-2.0-systemd.py
 WorkingDirectory=/home/pi/Documents/dev/uptime2.0
 StandardOutput=inherit
 StandardError=inherit
-Restart=always
+Restart=on-failure
 User=root
 
 [Install]

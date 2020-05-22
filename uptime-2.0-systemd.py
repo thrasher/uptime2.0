@@ -224,7 +224,7 @@ while (True):
 	if ( Vin < V_in_min ): # Vin has failed or is a brownout
 		log.warning("Vin is in brownout below %5.2f: Vin: %5.2f Vout: %5.2f Vbattery: %5.2f TempC: %8.2fC TempF: %6.2fF" % (V_in_min, Vin, Vout, Vbattery, TempC, TempF))
 		if (Vbattery < V_batt_min ): # Battery is low, time to shutdown.
-			log.warning("Battery exhausted below %5.2f, shutdown initiated: Vin: %5.2f Vout: %5.2f Vbattery: %5.2f TempC: %8.2fC TempF: %6.2fF" % (V_batt_min, Vin, Vout, Vbattery, TempC, TempF))
+			log.critical("Battery exhausted below %5.2f, shutdown initiated: Vin: %5.2f Vout: %5.2f Vbattery: %5.2f TempC: %8.2fC TempF: %6.2fF" % (V_batt_min, Vin, Vout, Vbattery, TempC, TempF))
 #			print("Shutdown initiated at %s " % (time.ctime()))
                 	#
 			sys.stdout.flush()

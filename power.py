@@ -6,6 +6,7 @@
 #
 
 import os
+import time
 
 # handle one-line on/off commands
 def manage(name, isOn, onCmd, offCmd):
@@ -26,7 +27,7 @@ def wifi(isOn):
 	manage("WiFi", isOn, "sudo rfkill unblock wifi", "sudo rfkill block wifi")
 	# manage("WiFi", isOn, "sudo iwconfig wlan0 txpower on", "sudo iwconfig wlan0 txpower off")
 
-def bluetooth(isOn)
+def bluetooth(isOn):
 	manage("Bluetooth", isOn, "sudo rfkill unblock bluetooth", "sudo rfkill block bluetooth")
 
 def hdmi(isOn):
@@ -44,12 +45,14 @@ def actLed(isOn):
 
 # set all known devices to on/off power state
 def power(isOn):
-	hdmi(isOn)
 	wifi(isOn)
 	bluetooth(isOn)
-	usb(isOn)
 	pwrLed(isOn)
 	actLed(isOn)
+	time.sleep(10)
+	usb(isOn)
+	time.sleep(10)
+	hdmi(isOn)
 
 # turn everything on
 def highPower():
@@ -58,4 +61,10 @@ def highPower():
 # turn everything off
 def lowPower():
 	power(False)
+
+print("shutting off peripherals")
+wifi(False)
+time.sleep(10)
+print("turning on peripherals")
+wifi(True)
 

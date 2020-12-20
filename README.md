@@ -35,7 +35,7 @@ At any time you can hit Control C to terminate the program.
 
 Configure uptime monitoring and auto shut-off using [systemd](https://www.raspberrypi.org/documentation/linux/usage/systemd.md). This is an alternative to setting up /etc/rc.local, for Raspberry Pi OS Buster systems. Do not setup /etc/rc.local if you use the systemd method. Python 2 is at it's end of life, and is not supported: please use Python 3.
 
-First you must enable the i2c ports using
+First you must enable the I2C ports using
 
     sudo raspi-config
 
@@ -56,6 +56,10 @@ To enable the systemd service when the Pi boots:
     sudo systemctl enable uptime-2.0.service
     sudo systemctl start uptime-2.0.service
 
+Verify it is running with:
+
+    sudo systemctl status uptime-2.0.service
+
 To stop the service:
 
     sudo systemctl stop uptime-2.0.service
@@ -64,6 +68,8 @@ Read and follow journal output from the process
 
     sudo journalctl -f -u uptime-2.0.service
 
-Note that systemd services have some [documentation](https://www.freedesktop.org/software/systemd/man/systemd.service.html) you may want to read if modifying uptime-2.0.service.
+If you see an error in the journal similar to this (below), then verify once more that you've enabled the I2C port.
 
-
+    File "uptime-2.0-systemd.py", line 65, in <module>
+    bus = SMBus(1)
+    FileNotFoundError: [Errno 2] No such file or directory

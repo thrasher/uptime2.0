@@ -1,5 +1,5 @@
 # Pi-UpTime2.0 and PiZ-UpTime 2.0
-*Last Update April 22, 2020.*
+*Last Update December 20, 2020.*
 
 To monitor the battery and shutdown the pi automatically every time the Pi reboots, follow the steps below.
 
@@ -31,14 +31,26 @@ At any time you can hit Control C to terminate the program.
 
  Contact support via https://alchemy-power.com/contact-us/ should you have any issues.
 
-## Install Raspbian systemd Service
+## Install Raspberry Pi OS (Raspbian) systemd Service
 
-Configure uptime monitoring and auto shut-off using [systemd](https://www.raspberrypi.org/documentation/linux/usage/systemd.md). This is an alternative to setting up /etc/rc.local, for Raspbian Buster systems. Do not setup /etc/rc.local if you use the systemd method.
+Configure uptime monitoring and auto shut-off using [systemd](https://www.raspberrypi.org/documentation/linux/usage/systemd.md). This is an alternative to setting up /etc/rc.local, for Raspberry Pi OS Buster systems. Do not setup /etc/rc.local if you use the systemd method. Python 2 is at it's end of life, and is not supported: please use Python 3.
+
+First you must enable the i2c ports using
+
+    sudo raspi-config
+
+Choose menu options:
+* Interface Options / I2C / Yes *
 
 To enable the systemd service when the Pi boots:
 
-    sudo apt-get install python-systemd # if using python 2
-    sudo apt-get install python3-systemd # if using python 3
+    # download this codebase
+    git clone https://github.com/thrasher/uptime2.0.git
+
+    # insure dependencies are installed (note: Buster Lite does not include these packages)
+    sudo apt-get install python3-systemd python3-smbus
+
+    # setup the service
     sudo ln -s `pwd`/uptime-2.0.service /etc/systemd/system/uptime-2.0.service
     sudo systemctl daemon-reload
     sudo systemctl enable uptime-2.0.service
@@ -50,7 +62,7 @@ To stop the service:
 
 Read and follow journal output from the process
 
-    journalctl -f -u uptime-2.0.service
+    sudo journalctl -f -u uptime-2.0.service
 
 Note that systemd services have some [documentation](https://www.freedesktop.org/software/systemd/man/systemd.service.html) you may want to read if modifying uptime-2.0.service.
 

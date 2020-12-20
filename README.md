@@ -39,8 +39,7 @@ First you must enable the I2C ports using
 
     sudo raspi-config
 
-Choose menu options:
-* Interface Options / I2C / Yes *
+Choose menu options: *Interface Options / I2C / Yes*
 
 To enable the systemd service when the Pi boots:
 

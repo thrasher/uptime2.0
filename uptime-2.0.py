@@ -90,7 +90,7 @@ vref = 6.144 # This is the max Vref - allows us to measure Vin up to Vin + 0.3V
 #####################################################################################################################
 
 
-max_reading = 2097.0 # 2^11 - 1 = 12 bits of information, with MSB set to zero. See page 15 of data sheet.
+max_reading = 2047.0 # 2^11 - 1 = 12 bits of information, with MSB set to zero. See page 15 of data sheet.
 
 # Now we determine the operating parameters.
 # lange = number of bytes to read. 
@@ -101,7 +101,7 @@ max_reading = 2097.0 # 2^11 - 1 = 12 bits of information, with MSB set to zero. 
 #
 # All the timeouts and other operational variables.
 lange = 0x02 # number of bytes to read in the block. Need for Debug statements below.
-zeit = 5     # number of seconds to sleep between each measurement group. This will read variables every zeit seconds.
+zeit = 2     # number of seconds to sleep between each measurement group. This will read variables every 20 seconds.
 tiempo = 0.1 # number of seconds to sleep between each channel reading.
 # tiempo = 1/SPS (default is 128) + 1 ms - so tiempo can be as low as 0.002 seconds. We deliberately make it
 # higher here for readings to settle down. Fast enough for us. In fact, in many cases this may not even be needed.
@@ -218,7 +218,7 @@ while (True):
 #	TempC = (4.0 - TempV) / 0.0432 # Temperature in C calculated.
 # Use the below line for Pi-UpTime UPS 2.0
 	TempC = (4.236 - TempV) / 0.0408 # Temperature in C calculated.
-# Convert C to F
+# Line below computes Temperature in F from C
 	TempF = TempC * 1.8 + 32.0  # Temperature in F
 # Temperature is measured by measuring the V across the NTC. We assume a linear behavior in the use range.
 # According to Murata data sheet, the measurement of temperature is determined as below.
@@ -284,9 +284,7 @@ while (True):
 
 
 #====================================================================================
-# End of check statements. At end of the while statement.
+# End of check statements.
 #====================================================================================
 	sys.stdout.flush()
-# Sleep till next reading.
 	time.sleep(zeit)
-# End of main loop.

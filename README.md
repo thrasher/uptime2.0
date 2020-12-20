@@ -43,11 +43,15 @@ Choose menu options: *Interface Options / I2C / Yes*
 
 To enable the systemd service when the Pi boots:
 
+    # insure dependencies are installed (note: Buster Lite does not include these packages)
+    sudo apt-get install python3-systemd python3-smbus
+
     # download this codebase
     git clone https://github.com/thrasher/uptime2.0.git
 
-    # insure dependencies are installed (note: Buster Lite does not include these packages)
-    sudo apt-get install python3-systemd python3-smbus
+    # edit uptime-2.0.service and set WorkingDirectory= the full path to your uptime2.0 directory
+    cd uptime2.0
+    nano uptime-2.0.service
 
     # setup the service
     sudo ln -s `pwd`/uptime-2.0.service /etc/systemd/system/uptime-2.0.service

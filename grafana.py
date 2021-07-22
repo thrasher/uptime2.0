@@ -189,6 +189,11 @@ def keyboardInterruptHandler(signal, frame):
 # Start watching for Keyboard interrupt
 signal.signal(signal.SIGINT, keyboardInterruptHandler)
 
+def measure_temp():
+        temp = os.popen("vcgencmd measure_temp").readline()
+        return (round(float(temp.replace("temp=","").replace("'C\n", "")), 2))
+
+
 # Main routine. 
 
 ch0_mult = 1 # Multiplier is used to offset any values and for calibration adjustments. Vin
@@ -298,7 +303,8 @@ uptime_data = [
             "TempC": round(TempC, 2),
             "TempF": round(TempF, 2),
             "Shutdown": shutdown,
-            "Charging": charging
+            "Charging": charging,
+            "TempCPU_C": measure_temp()
         }
     }
 ]

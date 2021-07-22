@@ -48,6 +48,7 @@ import subprocess
 
 from smbus import SMBus
 from sys import exit
+from influxdb import InfluxDBClient
 
 # for older PI's (version 1) use bus = SMBus(0) in statement below.
 bus = SMBus(1)
@@ -283,3 +284,24 @@ while (True):
 #	time.sleep(zeit)
 	break
 # End of main loop.
+
+uptime_data = [
+    {
+        "measurement" : "uptime_data",
+        "tags" : {
+            "host": "vanlife"
+        },
+        "fields" : {
+            "Vin": '{0:.2f}'.format(Vin),
+            "Vout": '{0:.2f}'.format(Vout),
+            "Vbatt": '{0:.2f}'.format(Vbattery),
+            "TempC": '{0:.2f}'.format(TempC),
+            "TempF": '{0:.2f}'.format(TempF),
+            "Shutdown": shutdown,
+            "Charging": charging
+        }
+    }
+]
+
+client = InfluxDBClient('localhost', 8086, 'uptime', '', 'uptime')
+client.write_points(uptime_data)

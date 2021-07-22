@@ -292,16 +292,17 @@ uptime_data = [
             "host": "vanlife"
         },
         "fields" : {
-            "Vin": '{0:.2f}'.format(Vin),
-            "Vout": '{0:.2f}'.format(Vout),
-            "Vbatt": '{0:.2f}'.format(Vbattery),
-            "TempC": '{0:.2f}'.format(TempC),
-            "TempF": '{0:.2f}'.format(TempF),
+            "Vin": round(Vin, 2),
+            "Vout": round(Vout, 2),
+            "Vbatt": round(Vbattery, 2),
+            "TempC": round(TempC, 2),
+            "TempF": round(TempF, 2),
             "Shutdown": shutdown,
             "Charging": charging
         }
     }
 ]
 
+#print(uptime_data)
 client = InfluxDBClient('localhost', 8086, 'uptime', '', 'uptime')
 client.write_points(uptime_data)

@@ -43,9 +43,13 @@ Choose menu options: *Interface Options / I2C / Yes*
 Alternatively, uncomment the “dtparam=i2c_arm=on” line in /boot/config.txt
 No reboot should be needed.
 
+Install I2C tools
+
+    sudo apt-get update && sudo apt-get install i2c-tools
+
 Verify you can read the i2c bus with:
 
-    i2cdetect -y 1
+    sudo i2cdetect -y 1
     # verify that you see 48, the default i2c address of the PiUpTime.
 
 To enable the systemd service when the Pi boots:

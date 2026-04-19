@@ -5,7 +5,7 @@ To monitor the battery and shutdown the pi automatically every time the Pi reboo
 
 1) Save the python scripts you have downloaded in a folder called uptime (or any other name). We will use
    uptime for this example. Note the path using the "pwd" command. We will assume the path for the folder is
-   /home/pi/uptime and all the files are in that folder. Use the file **uptime-2.0-rc.local.py**
+   /home/pi/uptime and all the files are in that folder. Use the file **uptime-2.0-rc-local.py**
    * Please edit the lines in the file which measures termperature. The code for temperature measurement is different
      for PiZ-UpTime and Pi-UpTime.
 2) Edit the file /etc/rc.local - we assume you have your favorite editor (nano, vi, emacs etc.) Make sure
